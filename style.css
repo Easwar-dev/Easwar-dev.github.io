@@ -1,0 +1,407 @@
+/* --- Reset & Base --- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: rgb(73,78,82);
+    line-height: 1.6;
+    margin: 0;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+a {
+    color: #3d4144;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+/* --- Navigation (Masthead) - UPDATED 2.0 --- */
+.masthead {
+    border-bottom: 1px solid #eee;
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+    background: #fff;
+}
+
+.masthead__inner-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.visible-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 30px; /* Wide spacing like the video */
+}
+
+/* Default Link Style */
+.masthead__menu-item a {
+    font-weight: 700;    /* Bold text */
+    font-size: 1.15rem;
+    color: #757575;      /* Medium Grey (Default) */
+    text-decoration: none;
+    position: relative;  /* Needed for the underline animation */
+    transition: color 0.3s ease; /* Smooth color darken */
+}
+
+/* The Animated Underline */
+.masthead__menu-item a::after {
+    content: '';
+    position: absolute;
+    width: 0;            /* Start with 0 width (invisible) */
+    height: 2px;         /* Thickness of the line */
+    bottom: -4px;        /* Distance from text */
+    left: 0;
+    background-color: #000; /* Black underline */
+    transition: width 0.3s ease-in-out; /* The animation magic */
+}
+
+/* Hover State */
+.masthead__menu-item a:hover {
+    color: #000000;      /* Turns Black on hover */
+}
+
+/* Hover State - Trigger Animation */
+.masthead__menu-item a:hover::after {
+    width: 100%;         /* Expands line to full width */
+}
+/* Active Link Style */
+
+/* --- Layout Grid --- */
+#main {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 300px 1fr; /* Sidebar fixed width, content takes rest */
+    gap: 40px;
+    padding: 0 2rem;
+    width: 100%;
+    flex: 1;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    font-size: 0.9rem;
+}
+
+.author__avatar img {
+    max-width: 200px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 0 1rem 0;
+}
+
+.author__content {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.author__name {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.author__bio {
+    color: #666;
+    margin-top: 5px;
+}
+
+.author__urls {
+    list-style: none;
+    padding: 0;
+}
+
+.author__urls li {
+    margin-bottom: 8px;
+}
+
+.author__urls i {
+    width: 20px;
+    text-align: center;
+    margin-right: 5px;
+    color: #777;
+}
+
+/* --- Main Content Area --- */
+.page__content {
+    font-size: 1.05rem;
+}
+
+h1 {
+    font-size: 2rem;
+    border-bottom: 1px solid #f2f3f3;
+    padding-bottom: 0.5rem;
+    margin-top: 2rem;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+/* --- Footer --- */
+.page__footer {
+    margin-top: 3rem;
+    padding: 2rem;
+    border-top: 1px solid #eee;
+    text-align: center;
+    color: #777;
+    font-size: 0.8rem;
+}
+
+/* --- IMPROVED MOBILE RESPONSIVENESS (FINAL FIX) --- */
+@media (max-width: 800px) {
+    /* 1. Stack sidebar and content vertically */
+    #main {
+        grid-template-columns: 1fr;
+        padding: 0 1rem; /* Reduced side padding for mobile so content has more room */
+        gap: 20px; /* Reduced gap between sidebar and content */
+    }
+
+    /* 2. Fix the Navigation Bar Squishing */
+    .masthead__inner-wrap {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        padding: 1rem; /* Ensure nav doesn't overflow */
+    }
+
+    .visible-links {
+        gap: 20px;
+        justify-content: center;
+        width: 100%;
+        flex-wrap: wrap; /* Allows links to wrap if screen is very small */
+    }
+
+    /* 3. Shrink the Profile on Mobile */
+    .sidebar {
+        text-align: center;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+        width: 100%; /* Ensure sidebar fits fully */
+    }
+    
+    .author__avatar img {
+        max-width: 130px;
+        margin: 0 auto 1rem auto;
+    }
+    
+    .author__content, .author__urls {
+        text-align: center;
+    }
+    
+    .author__urls li {
+        display: inline-block;
+        margin: 0 10px;
+    }
+
+    /* 4. FIX FOR PROJECTS OVERFLOW */
+    .project-grid {
+        display: grid;
+        grid-template-columns: 1fr; /* Force 1 column on mobile */
+        gap: 20px;
+        width: 100%; /* Ensure grid doesn't exceed screen */
+        margin-top: 20px;
+    }
+
+    .project-card {
+        width: 100%; /* Ensure card fits inside the grid */
+        margin: 0; /* Remove extra margins */
+        box-sizing: border-box; /* Includes padding in width calculation */
+    }
+
+    /* Fix Page Content Width */
+    .page__inner-wrap {
+        width: 100%;
+        overflow-x: hidden; /* Prevents horizontal scroll */
+    }
+}
+
+/* --- CV Specific Styles --- */
+.cv-section-title {
+    margin-top: 40px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    color: #222;
+}
+
+.cv-item {
+    margin-bottom: 25px;
+}
+
+.cv-header {
+    display: flex;
+    justify-content: space-between; 
+    align-items: baseline;
+}
+
+.cv-role {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.cv-date {
+    font-size: 0.9rem;
+    color: #666;
+    font-style: italic;
+    min-width: 150px;
+    text-align: right;
+}
+
+.cv-sub {
+    font-size: 1rem;
+    color: #555;
+    font-style: italic;
+    margin-bottom: 5px;
+}
+
+/* Button Style */
+.btn {
+    display: inline-block;
+    background: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #555;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* --- Projects Grid Styles --- */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.project-card {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    background: #fff;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Note: Even though we removed images in HTML, keeping this style is fine/safe */
+.project-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; 
+    display: block;
+}
+
+.project-info {
+    padding: 20px;
+}
+
+.project-info h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+    color: #222;
+}
+
+.project-info p {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* Tech Stack Tags */
+.tech-stack {
+    margin-bottom: 15px;
+}
+
+.tech-stack span {
+    display: inline-block;
+    background: #f0f0f0;
+    color: #555;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+/* Small Buttons for Projects */
+.btn-small {
+    display: inline-block;
+    padding: 5px 12px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #333;
+    font-size: 0.85rem;
+    margin-right: 5px;
+    transition: all 0.2s;
+}
+
+.btn-small:hover {
+    background-color: #333;
+    color: #fff;
+    border-color: #333;
+    text-decoration: none;
+}
+
+/* FORCE LinkedIn Icon to Blue */
+.author__urls i.fa-linkedin {
+    color: #0077b5 !important;
+}
+/* FORCE Github Icon to Black */
+.author__urls i.fa-github {
+    color: #000000 !important;
+}
+
+/* --- RESTORED: FADE IN & SLIDE UP ANIMATION --- */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px); /* Start slightly lower */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);    /* End in normal position */
+    }
+}
+
+/* 1. Animate the Sidebar first */
+.sidebar {
+    animation: fadeInUp 0.6s ease-out;
+    animation-fill-mode: both; /* Keeps the style after animation ends */
+}
+
+/* 2. Animate the Main Content slightly later (0.2s delay) */
+.page__inner-wrap {
+    animation: fadeInUp 0.6s ease-out;
+    animation-delay: 0.2s; /* Waits 0.2 seconds before starting */
+    animation-fill-mode: both;
+    opacity: 0; /* Hidden until animation starts */
+}
